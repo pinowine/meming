@@ -9,7 +9,7 @@ Based on [Penn part-of-speech tags](https://rednoise.org/rita/reference/postags.
 1. Proper nouns (NNP, NNPS): extract the first syllable slice
    > e.g. "Boris" -> "Bo", "Jackson" -> "Jack"
 2. Normal nouns (NN, NNS): extract all the consonant phones
-   > e.g. "cat" -> "kt", "dog" -> "dg"
+   > e.g. "cat" -> "ct", "dog" -> "dg"
 
 ### Pronoun case
 
