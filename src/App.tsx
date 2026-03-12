@@ -36,7 +36,7 @@ function App() {
     <>
       <div className="flex gap-2 px-12 py-2 bg-neutral-200 items-baseline flex-wrap">
         <h1>BadWriter</h1>
-        <h1 className="text-base">Try to write like a IELTS 3.0 writer_</h1>
+        <h1 className="text-base">Try to write like an IELTS 3.0 writer_</h1>
       </div>
       <div className="min-h-screen bg-neutral-950 text-neutral-100 p-14 space-y-4 grid grid-cols-1 md:grid-cols-2 gap-16">
         <div className="flex flex-col gap-2 flex-wrap">
