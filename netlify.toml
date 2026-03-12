@@ -1,6 +1,7 @@
 [build]
 functions = "netlify/functions"
-publish = "dist"
+publish = "dist/"
+command = "netlify build"
 
 [dev]
 targetPort = 5173
