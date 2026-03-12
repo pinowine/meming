@@ -11,8 +11,6 @@
 import { RiTa } from "rita";
 import type { TypingProgram, TypingOp } from "../types/typingProgram";
 
-type RuleResult = { ops: TypingOp[]; advance: number } | null;
-
 // --- CONSTANTS ---
 
 // usual English syllable onsets
