@@ -5,6 +5,8 @@ import { defineManifest } from "@crxjs/vite-plugin";
 export default defineManifest({
   manifest_version: 3,
   name: "Bad Writer",
+  description:
+    "Rewrite text to be more interesting... or you can call it, worse-written.",
   version: "1.0.0",
   icons: {
     "16": "favicon-96x96.png",
