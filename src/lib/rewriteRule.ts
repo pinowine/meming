@@ -73,7 +73,7 @@ const PRON_ABBREV: Record<string, string> = {
   have: "ve",
 };
 // normal abbreviation
-const ABBREV: Record<string, string> = {
+export const ABBREV: Record<string, string> = {
   for: "4",
   to: "2",
   are: "r",
@@ -81,7 +81,7 @@ const ABBREV: Record<string, string> = {
   because: "cuz",
 };
 // slang replacement sheet: using a original word, rita will conjugate it to the correct form
-const SLANG_STEMS: Array<{ stems: string[]; out: string[] }> = [
+export const SLANG_STEMS: Array<{ stems: string[]; out: string[] }> = [
   {
     stems: [
       "smile",
@@ -160,6 +160,18 @@ const START = [
 ];
 // front punctuations
 const FRONT_PUNCTS = ["`", "“", "‘", "«", "‹", "《", "(", "["];
+
+// Custom extensions state
+let customSlangs: Array<{ stems: string[]; out: string[] }> = [];
+let customAbbrev: Record<string, string> = {};
+
+export function setCustomRules(
+  slangs: Array<{ stems: string[]; out: string[] }>,
+  abbrevs: Record<string, string>,
+) {
+  customSlangs = slangs;
+  customAbbrev = abbrevs;
+}
 
 // main export function
 export function rewriteText(text: string): TypingProgram {
@@ -250,7 +262,8 @@ function applyRules(
       advance: 1,
     };
   // rule 8
-  if (ABBREV[lower]) return { ops: normalAbbrev(tok, tokHasSpace), advance: 1 };
+  if (customAbbrev[lower] || ABBREV[lower])
+    return { ops: normalAbbrev(tok, tokHasSpace), advance: 1 };
   // rule 7
   if (tag === "prp" && checkNextVerb(next, nextTag))
     return {
@@ -300,6 +313,9 @@ function checkNextVerb(next: string, nextTag: string): boolean {
 // check if a token is inside the slang sheet
 function getSlangBox(token: string): string[] | null {
   const stem = RiTa.stem(token).toLowerCase();
+  // Check custom first
+  const customHit = customSlangs.find((s) => s.stems.includes(stem));
+  if (customHit) return customHit.out;
   const hit = SLANG_STEMS.find((s) => s.stems.includes(stem));
   return hit?.out ?? null;
 }
@@ -474,7 +490,9 @@ function pronAbbrev(
 
 // normal abbreviation
 function normalAbbrev(token: string, hasSpace: boolean): TypingOp[] {
-  const output = matchInitialCase(token, ABBREV[token.toLowerCase()]);
+  const lower = token.toLowerCase();
+  const repl = customAbbrev[lower] || ABBREV[lower];
+  const output = matchInitialCase(token, repl);
   return buildReplaceOp(token, output, 180, hasSpace);
 }
 
