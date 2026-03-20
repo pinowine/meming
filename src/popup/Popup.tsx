@@ -19,7 +19,7 @@ export function Popup() {
         </p>
       </div>
 
-      {/* Brutalist status toggle check box */}
+      {/* status toggle check box */}
       <label className="flex items-center justify-between cursor-pointer group mt-2 hover:bg-zinc-100 dark:hover:bg-zinc-950 p-2 border border-transparent hover:border-black dark:hover:border-zinc-800 transition-colors">
         <span className="text-xs font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400 group-hover:text-black dark:group-hover:text-white transition-colors">
           {isActive ? "SYS_ACTIVE" : "SYS_DOWN"}
